@@ -29,30 +29,30 @@ object Spark16_HBase {
     /*
 
     val HbaseRDD: RDD[(ImmutableBytesWritable, Result)] = sc.newAPIHadoopRDD(
-    cof,
-    classOf[TableInputFormat],
-    classOf[ImmutableBytesWritable],
-    classOf[Result]
+      cof,
+      classOf[TableInputFormat],
+      classOf[ImmutableBytesWritable],
+      classOf[Result]
     )
     HbaseRDD.foreach {
-    case (rowkey, result) => {
-    val cells: Array[Cell] = result.rawCells()
-    for (cell <- cells) {
-    val value: String = Bytes.toString(CellUtil.cloneValue(cell))
-    val colName: String = Bytes.toString(CellUtil.cloneQualifier(cell))
-    val row: String = Bytes.toString(CellUtil.cloneRow(cell))
-    println(s"主键为:${row},列名为:${colName},值:${value}")
-  }
-  }
-  }
+      case (rowkey, result) => {
+        val cells: Array[Cell] = result.rawCells()
+        for (cell <- cells) {
+          val value: String = Bytes.toString(CellUtil.cloneValue(cell))
+          val colName: String = Bytes.toString(CellUtil.cloneQualifier(cell))
+          val row: String = Bytes.toString(CellUtil.cloneRow(cell))
+          println(s"主键为:${row},列名为:${colName},值:${value}")
+        }
+      }
+    }
 
-     */
+   */
 
 
     //向HBase中存储数据
 
 
-    val putRDD= sc.makeRDD(List(("1003", "古天乐"), ("1004", "张家辉"), ("1005", "刘德华")))
+    val putRDD = sc.makeRDD(List(("1003", "古天乐"), ("1004", "张家辉"), ("1005", "刘德华")))
 
     val putToHBase: RDD[(ImmutableBytesWritable, Put)] = putRDD.map {
       case (rowKey, name) => {
